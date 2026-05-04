@@ -48,11 +48,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/user/register', authLimiter);
-app.use('/user/login', authLimiter);
+app.use('/user/register');
+app.use('/user/login');
 
 // API routes
-app.use('/auth', authLimiter, authRoutes);
+app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/items', itemRoutes);
 app.use('/transaction', transactionRoutes);
