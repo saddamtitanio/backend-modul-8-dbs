@@ -70,7 +70,12 @@ class UserService {
 
   static async getUserByEmail(email) {
     const user = await User.findByEmail(email);
-    return user;
+
+    if (!user) return null;
+
+    const { password, ...safeUser } = user;
+
+    return safeUser;
   }
 }
 
