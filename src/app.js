@@ -12,7 +12,7 @@ const rateLimit = require('express-rate-limit');
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 20,
   message: {
     success: false,
     message: 'Too many requests from this IP, please try again later',
@@ -24,30 +24,27 @@ const app = express();
 
 app.use(helmet());
 
-const allowedOrigins = new Set([
+const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   'https://cs-dbs-modul10.vercel.app',
   'https://frontendmodule10.vercel.app',
   'https://game-vault-ten.vercel.app',
   'https://gear-vault-rouge.vercel.app',
-]);
+];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-
-    const cleanOrigin = origin.replace(/\/$/, '');
-
-    if (allowedOrigins.has(cleanOrigin)) {
-      return callback(null, true);
-    }
-
-    return callback(new Error(`Not allowed by CORS: ${origin}`));
-  },
-  credentials: true,
-}));
-
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
 // Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
