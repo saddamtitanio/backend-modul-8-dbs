@@ -11,12 +11,7 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-app.options('*', cors(corsOptions));
-
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-  crossOriginOpenerPolicy: false,
-}));
+app.use(helmet());
 
 const allowedOrigins = [
   'http://localhost:5173',
@@ -40,6 +35,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
