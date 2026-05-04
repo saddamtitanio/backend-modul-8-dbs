@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 
 // Import routes
@@ -33,10 +32,6 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
 // Body parsing
 app.use(express.json());
