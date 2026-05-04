@@ -27,7 +27,8 @@ app.use(helmet());
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
-  'https://cs-dbs-modul10.vercel.app'
+  'https://cs-dbs-modul10.vercel.app',
+  'https://frontendmodule10.vercel.app'
 ];
 
 app.use(
