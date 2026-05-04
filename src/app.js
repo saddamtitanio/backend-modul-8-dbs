@@ -12,7 +12,7 @@ const rateLimit = require('express-rate-limit');
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: 100,
   message: {
     success: false,
     message: 'Too many requests from this IP, please try again later',
@@ -48,11 +48,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/user/register');
-app.use('/user/login');
+app.use('/user/register', authLimiter);
+app.use('/user/login', authLimiter);
 
 // API routes
-app.use('/auth', authRoutes);
+app.use('/auth', authLimiter, authRoutes);
 app.use('/user', userRoutes);
 app.use('/items', itemRoutes);
 app.use('/transaction', transactionRoutes);
