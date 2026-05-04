@@ -45,8 +45,6 @@ const userRegistrationValidation = [
 ];
 
 const userUpdateValidation = [
-  body('id')
-    .isInt().withMessage('User ID must be an integer'),
   body('name')
     .optional()
     .trim()
