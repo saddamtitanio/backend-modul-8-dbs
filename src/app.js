@@ -26,14 +26,15 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log('CORS origin:', origin);
+
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(null, false);
+      console.log('Blocked origin:', origin);
+      callback(null, true); // TEMP DEBUG MODE
     }
-  },
-  credentials: true,
-  optionsSuccessStatus: 200,
+  }
 };
 
 app.use(cors(corsOptions));
