@@ -1,8 +1,10 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
 require('dotenv').config();
 const app = require('./src/app');
 const db = require('./src/config/database');
 
-const PORT = process.env.PORT || 3000;
+const PORT = 8000;
 
 // Test database connection
 db.query('SELECT NOW()')
