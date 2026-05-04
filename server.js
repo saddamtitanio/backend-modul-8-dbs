@@ -4,7 +4,7 @@ require('dotenv').config();
 const app = require('./src/app');
 const db = require('./src/config/database');
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 // Test database connection
 db.query('SELECT NOW()')
