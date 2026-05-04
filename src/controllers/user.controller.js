@@ -35,8 +35,9 @@ class UserController {
 
   static async updateProfile(req, res, next) {
     try {
-      const { id, name, username, email, phone, password, balance } = req.body;
-      const updatedUser = await UserService.updateProfile(id, { name, username, email, phone, password, balance });
+      const { name, username, email, phone, password, balance } = req.body;
+      const userId = req.query.user_id;
+      const updatedUser = await UserService.updateProfile(userId, { name, username, email, phone, password, balance });
       await redis.del(`user:${email}`);
       res.status(200).json({
         success: true,
