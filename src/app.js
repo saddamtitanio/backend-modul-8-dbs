@@ -24,26 +24,30 @@ const app = express();
 
 app.use(helmet());
 
-const allowedOrigins = [
+const allowedOrigins = new Set([
   'http://localhost:5173',
   'http://localhost:3000',
   'https://cs-dbs-modul10.vercel.app',
   'https://frontendmodule10.vercel.app',
-  'https://game-vault-ten.vercel.app'
-];
+  'https://game-vault-ten.vercel.app',
+  'https://gear-vault-rouge.vercel.app',
+]);
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    const cleanOrigin = origin.replace(/\/$/, '');
+
+    if (allowedOrigins.has(cleanOrigin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
+  },
+  credentials: true,
+}));
+
 // Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
