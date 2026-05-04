@@ -20,6 +20,7 @@ const allowedOrigins = [
   'https://frontendmodule10.vercel.app',
   'https://game-vault-ten.vercel.app',
   'https://gear-vault-rouge.vercel.app',
+  'https://dbscs-10.vercel.app'
 ];
 
 const corsOptions = {
