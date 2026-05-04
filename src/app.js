@@ -29,7 +29,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'https://cs-dbs-modul10.vercel.app',
   'https://frontendmodule10.vercel.app',
-  'https://game-vault-rouge.vercel.app'
+  'https://game-vault-ten.vercel.app'
 ];
 
 app.use(
